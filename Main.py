@@ -10,21 +10,23 @@ ekran_res = [500,900]
 ekran = pygame.display.set_mode(ekran_res)
 clock = pygame.time.Clock()
 # CODE +++++++++++++++++++++++++++++++++++++++++++++++++ 1
-
-
-
 slime = Slime(ekran,ekran_res)
 platform_list = []
 
-platform_tut = 0
-while platform_tut < 12:
-    platform_list.append(Platform(ekran, ekran_res, r.randint(0,370), 800 - (80 * platform_tut)))
-    platform_tut += 1
+platformID = 1
+while platformID <= 100:
+    platform_list.append(Platform(ekran, ekran_res, r.randint(0,370), 800 - (80 * platformID)))
+    platformID += 1
 
 left = False
 right = False
 
 kamera_vel = 0
+
+platform_hareket = False
+
+
+
 
 
 # CODE +++++++++++++++++++++++++++++++++++++++++++++++++ 1
@@ -69,15 +71,11 @@ while run:
     
     for x in platform_list:
         x.update(kamera_vel)
-        
+    
     for x in platform_list:
         if x.rect.y > 900:
             #slime.yer_kaldır = False
-            
             platform_list.remove(x)
-            platform_list.append(Platform(ekran, ekran_res,0, -20))
-            platform_tut += 1
-
 
     slime.update(platform_list, kamera_vel)
 
